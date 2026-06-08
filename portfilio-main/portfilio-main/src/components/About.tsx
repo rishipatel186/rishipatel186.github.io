@@ -1,5 +1,7 @@
 import { Code2, Zap, Server, Smartphone } from 'lucide-react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import type { MutableRefObject } from 'react';
+import { useRef } from 'react';
 
 const highlights = [
   {
@@ -25,8 +27,8 @@ const highlights = [
 ];
 
 export default function About() {
-  const textRef = useScrollReveal();
-  const gridRef = useScrollReveal();
+  const textRef = useScrollReveal() as MutableRefObject<HTMLDivElement>;
+  const gridRef = useScrollReveal() as MutableRefObject<HTMLDivElement>;
 
   return (
     <section id="about" className="border-white/5 border-t py-16 sm:py-20 md:py-24 relative">
