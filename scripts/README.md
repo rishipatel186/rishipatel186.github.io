@@ -36,4 +36,5 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts\auto-push-confirm.ps
 ```
 
 GitHub Pages setup reminder:
+
 - Ensure your repository's Pages source is set to the `gh-pages` branch (Settings → Pages). The CI workflow `Deploy site to gh-pages` publishes `dist/` to that branch automatically when you push to `main`.
