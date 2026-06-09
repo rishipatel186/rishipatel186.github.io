@@ -1,0 +1,25 @@
+name: Ensure GitHub Pages uses gh-pages
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  set-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ensure Pages source is gh-pages
+        env:
+          REPO: ${{ github.repository }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Setting Pages source to gh-pages for $REPO"
+          curl -s -X PUT "https://api.github.com/repos/$REPO/pages" \
+            -H "Authorization: token $TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -d '{"source":{"branch":"gh-pages","path":"/"}}' \
+            | jq || true
