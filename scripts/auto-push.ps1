@@ -19,7 +19,7 @@ Set-Location -Path .. | Out-Null
 
 Write-Host "Starting auto-push watcher in $(Get-Location)"
 
-$exclude = @('.git','node_modules','dist','docs','.husky')
+$exclude = @('.git', 'node_modules', 'dist', 'docs', '.husky')
 
 function IsExcluded($path) {
     foreach ($e in $exclude) {
@@ -43,10 +43,12 @@ $perform = {
             git commit -m $msg
             git push
             Write-Host "Pushed: $msg"
-        } else {
+        }
+        else {
             Write-Host "No changes to commit."
         }
-    } catch {
+    }
+    catch {
         Write-Host "Auto-push failed: $_"
     }
 }

@@ -6,8 +6,8 @@ import { useRef } from 'react';
 const highlights = [
   {
     icon: Code2,
-    title: 'Clean Codes',
-    description: 'Maintainable, modular, and efficient codebases adhering to best practices.',
+    title: 'Clean Code',
+    description: 'Maintainable, and efficient codebases adhering to best practices.',
   },
   {
     icon: Zap,
