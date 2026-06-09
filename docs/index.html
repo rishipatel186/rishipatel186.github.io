@@ -2,63 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/assets/vite-DcBtz0py.svg" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PATEL RISHABH</title>
-    <script type="module" crossorigin src="/assets/main-K_6wSzbJ.js"></script>
-  </head><script>
-const VISITOR_STORAGE_KEY = 'site_visitor_logs';
-const SESSION_STORAGE_KEY = 'site_visitor_session_id';
-const MAX_VISITOR_RECORDS = 5000;
-
-function getOrCreateSessionId() {
-  const existingId = sessionStorage.getItem(SESSION_STORAGE_KEY);
-  if (existingId) return existingId;
-
-  const newId = `sess_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
-  sessionStorage.setItem(SESSION_STORAGE_KEY, newId);
-  return newId;
-}
-
-function readVisitors() {
-  try {
-    const raw = localStorage.getItem(VISITOR_STORAGE_KEY);
-    const parsed = raw ? JSON.parse(raw) : [];
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
-}
-
-function trackVisitor() {
-  const sessionId = getOrCreateSessionId();
-  const record = {
-    id: `visit_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
-    sessionId,
-    time: new Date().toISOString(),
-    ip: 'Not available in local mode',
-    userAgent: navigator.userAgent,
-    platform: navigator.platform,
-    language: navigator.language,
-    screen: `${window.screen.width}x${window.screen.height}`,
-    referrer: document.referrer || 'Direct',
-    page: window.location.href,
-    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
-  };
-
-  const visitors = readVisitors();
-  visitors.push(record);
-
-  if (visitors.length > MAX_VISITOR_RECORDS) {
-    visitors.splice(0, visitors.length - MAX_VISITOR_RECORDS);
-  }
-
-  localStorage.setItem(VISITOR_STORAGE_KEY, JSON.stringify(visitors));
-}
-
-trackVisitor();
-</script>
+    <title>Vite + React + TS</title>
+    <script type="module" crossorigin src="/assets/index-BIboyCsI.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CkYnV2S6.css">
+  </head>
   <body>
-    <div id="root"></div>
+    <div id="root"></div>
   </body>
 </html>
