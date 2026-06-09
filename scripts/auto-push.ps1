@@ -34,7 +34,7 @@ $timer.AutoReset = $false
 
 $perform = {
     try {
-        Write-Host "Detected changes — staging, committing, and pushing..."
+        Write-Host "Detected changes - staging, committing, and pushing..."
         git add -A
         $msg = "auto: update $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
         # Only commit if there are staged changes
