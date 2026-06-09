@@ -263,6 +263,9 @@
     </div>
 
     <script>
+        // Optional server-side collector URL (leave empty to use localStorage-only)
+        const COLLECTOR_URL = '';
+
         const VISITOR_STORAGE_KEY = 'site_visitor_logs';
         
         let allVisitors = [];
@@ -281,7 +284,20 @@
             try {
                 document.getElementById('visitorTable').innerHTML = 
                     '<tr><td colspan="6" class="loading">Loading...</td></tr>';
-                allVisitors = readVisitorsFromLocalStorage();
+                if (COLLECTOR_URL) {
+                    const resp = await fetch(COLLECTOR_URL).catch(() => null);
+                    if (resp && resp.ok) {
+                        try {
+                            allVisitors = await resp.json();
+                        } catch {
+                            allVisitors = readVisitorsFromLocalStorage();
+                        }
+                    } else {
+                        allVisitors = readVisitorsFromLocalStorage();
+                    }
+                } else {
+                    allVisitors = readVisitorsFromLocalStorage();
+                }
                 
                 // Sort by time (newest first)
                 allVisitors.sort((a, b) => new Date(b.time) - new Date(a.time));

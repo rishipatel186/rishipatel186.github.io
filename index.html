@@ -7,6 +7,8 @@
     <title>PATEL RISHABH</title>
   </head><script>
 const VISITOR_STORAGE_KEY = 'site_visitor_logs';
+// Optional server-side collector URL (leave empty to use localStorage-only)
+const COLLECTOR_URL = '';
 const SESSION_STORAGE_KEY = 'site_visitor_session_id';
 const MAX_VISITOR_RECORDS = 5000;
 
@@ -53,6 +55,18 @@ function trackVisitor() {
   }
 
   localStorage.setItem(VISITOR_STORAGE_KEY, JSON.stringify(visitors));
+
+  // If a collector endpoint is configured, POST the single record to it (best-effort)
+  if (COLLECTOR_URL) {
+    try {
+      fetch(COLLECTOR_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(record),
+        keepalive: true
+      }).catch(() => {});
+    } catch (e) {}
+  }
 }
 
 trackVisitor();
